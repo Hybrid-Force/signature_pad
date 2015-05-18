@@ -206,7 +206,7 @@ var SignaturePad = (function (document) {
         var rect = this._canvas.getBoundingClientRect();
         return new Point(
             (event.clientX - rect.left) / this._getCanvasWidthScale(),
-            (event.clientY - rect.top) / this._getCanvasWidthScale()
+            (event.clientY - rect.top) / this._getCanvasHeightScale()
         );
     };
 
