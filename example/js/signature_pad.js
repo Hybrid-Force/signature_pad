@@ -52,8 +52,6 @@ var SignaturePad = (function (document) {
         this._canvas = canvas;
         this._ctx = canvas.getContext("2d");
         this.clear();
-        this._canvasWidthScale = null;
-        this._canvasHeightScale = null;
 
         // we need add these inline so they are available to unbind while still having
         //  access to 'self' we could use _.bind but it's not worth adding a dependency
@@ -208,25 +206,11 @@ var SignaturePad = (function (document) {
         this._ctx.fillStyle = this.penColor;
     };
 
-    SignaturePad.prototype._getCanvasWidthScale = function () {
-        if (!this._canvasWidthScale) {
-            this._canvasWidthScale = this._canvas.clientWidth / this._canvas.width;
-        }
-        return this._canvasWidthScale;
-    };
-
-    SignaturePad.prototype._getCanvasHeightScale = function () {
-        if (!this._canvasHeightScale) {
-            this._canvasHeightScale = this._canvas.clientHeight / this._canvas.height;
-        }
-        return this._canvasHeightScale;
-    };
-
     SignaturePad.prototype._createPoint = function (event) {
         var rect = this._canvas.getBoundingClientRect();
         return new Point(
-            (event.clientX - rect.left) / this._getCanvasWidthScale(),
-            (event.clientY - rect.top) / this._getCanvasHeightScale()
+            event.clientX - rect.left,
+            event.clientY - rect.top
         );
     };
 
